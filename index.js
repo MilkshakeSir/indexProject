@@ -19,16 +19,21 @@ function getYoutubeId(url) {
     return null;
   }
 }
-
-
 function embedVideo(videoId) {
   videoContainer.innerHTML = ''; // Clear any existing video
 
   if (videoId) {
-    var embedCode = '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+    var width = 840;
+    var height = 472;
+
+    var embedCode = '<iframe width="' + width + '" height="' + height + '" src="https://www.youtube-nocookie.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
     videoContainer.innerHTML = embedCode;
   }
 }
+
+
+
+
 
 if (videoUrlFromLink) {
   const videoId = getYoutubeId(videoUrlFromLink)
