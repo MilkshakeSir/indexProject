@@ -23,10 +23,10 @@ function embedVideo(videoId) {
   videoContainer.innerHTML = ''; // Clear any existing video
 
   if (videoId) {
-    var width = 840;
-    var height = 472;
+    var width = 900;
+    var height = 506;
 
-    var embedCode = '<iframe width="' + width + '" height="' + height + '" src="https://www.youtube-nocookie.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+    var embedCode = '<iframe width="' + width + '" height="' + height + '" src="https://www.youtube-nocookie.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>' + '<p id="rightText">I hate css</p>';
     videoContainer.innerHTML = embedCode;
   }
 }

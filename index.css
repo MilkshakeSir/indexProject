@@ -15,9 +15,21 @@ h1 {
   text-align: left;
 }
 
+#rightText {
+  text-align: left;
+  font-size: 15px;
+}
+
+#videoContainer {
+  position: absolute;
+  right: 0px;
+  top: 12px;
+  padding-top: 30px;
+  padding-right: 250px;
+}
+
 iframe {
   border-radius: 12px;
-  margin:auto
 }
 
 button {
