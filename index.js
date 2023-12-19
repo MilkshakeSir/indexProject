@@ -10,7 +10,7 @@ var videoContainer = document.getElementById("videoContainer");
 const videoUrlFromLink = urlParams.get("video")
 
 function getYoutubeId(url) {
-  var youtubeRegex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:embed\/|watch\?v=|v\/|ytscreeningroom\?v=|e\/|u\/\w+\/|embed\/|v=|ytscreeningroom\?v=|e\/|u\/\w+\/))?(?:[\w-]{11})(?:[\?&][\w\?=]*)?$/;
+  var youtubeRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
   var match = url.match(youtubeRegex);
 
   if (match && match.length > 0) {
