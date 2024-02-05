@@ -1,13 +1,12 @@
 // Init function
 // Read url for ?video
+const urlParams = new URLSearchParams(window.location.search)
 
-const queryUrl = window.location.search
-const urlParams = new URLSearchParams(queryUrl) 
-
-var linkInput = document.getElementById("linkInput");
-var videoContainer = document.getElementById("videoContainer");
+var linkInput = document.getElementById("linkInput"); // input box
+var videoContainer = document.getElementById("videoContainer"); // iframe?
 
 const videoUrlFromLink = urlParams.get("video")
+const quickLoad = urlParams.get("q")
 
 function getYoutubeId(url) {
   var youtubeRegex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
@@ -19,7 +18,8 @@ function getYoutubeId(url) {
     return null;
   }
 }
-function embedVideo(videoId) {
+
+function embedVideo(videoId,returnCode) {
   videoContainer.innerHTML = ''; // Clear any existing video
 
   if (videoId) {
@@ -27,36 +27,40 @@ function embedVideo(videoId) {
     var height = 506;
 
     var embedCode = '<iframe width="' + width + '" height="' + height + '" src="https://www.youtube-nocookie.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
-    var finalCode =  embedCode // + '<p id="rightText">I hate css</p>';
+    var finalCode = embedCode // + '<p id="rightText">I hate css</p>';
     videoContainer.innerHTML = finalCode;
   }
 }
 
-
-
-
-
 if (videoUrlFromLink) {
   const videoId = getYoutubeId(videoUrlFromLink)
-  embedVideo(videoId)
+  
+  if (videoId) {
+    embedVideo(videoId)
+  } 
 }
 
-
-document.addEventListener('DOMContentLoaded', function() { // Start function
-
-
-  function addLink() {
-  var linkUrl = linkInput.value;
-  var videoId = getYoutubeId(linkUrl);
+if (quickLoad) {
+  const videoId = getYoutubeId(quickLoad)
 
   if (videoId) {
-
-    embedVideo(videoId); // Embed the video immediately
-
-    linkInput.value = ''; // Clear the input field
+    window.location.href = "https://www.youtube-nocookie.com/embed/"+videoId
   }
 }
 
+  document.addEventListener('DOMContentLoaded', function () { // Start function
+    function addLink() {
+      var linkUrl = linkInput.value;
+      var videoId = getYoutubeId(linkUrl);
 
-  document.getElementById("addButton").addEventListener('click', addLink);
-});
+      if (videoId) {
+
+        embedVideo(videoId); // Embed the video immediately
+
+        linkInput.value = ''; // Clear the input field
+      }
+    }
+
+
+    document.getElementById("addButton").addEventListener('click', addLink);
+  });
